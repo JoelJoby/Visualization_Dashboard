@@ -5,14 +5,18 @@
         function __construct()
         {
             parent::__construct();
+
+			$this->load->model('CommonModel');
         }
 
         public function index()
         {
-            $csvFile = include(APPPATH . 'uploads/Data.csv');
+            $csvFile = APPPATH . 'uploads/Data.csv';
+
+            // $csvFile = include(APPPATH . 'uploads/Data.csv');
 
             // echo "CSV File: $csvFile";
-            // print_r($csvFile);
+            // print_r("Hello");
             // exit;
 
             if (file_exists($csvFile)) 
@@ -26,33 +30,34 @@
                     while (($data = fgetcsv($handle, 1000, ',')) !== false)   // Read the CSV file line by line.
                     {
                         $new_user_data = array(
-                            'end_year'    => $data[1],
-                            'citylng'     => $data[2],
-                            'citylat'     => $data[3],
-                            'intensity'   => $data[4],
-                            'sector'      => $data[5],
-                            'topic'       => $data[6],
-                            'insight'     => $data[7],
-                            'swot'        => $data[8],
-                            'url'         => $data[9],
-                            'region'      => $data[10],
-                            'start_year'  => $data[11],
-                            'impact'      => $data[12],
-                            'added'       => $data[13],
-                            'published'   => $data[14],
-                            'city'        => $data[15],
-                            'country'     => $data[16],
-                            'relevance'   => $data[17],
-                            'pestle'      => $data[18],
-                            'source'      => $data[19],
-                            'title'       => $data[20],
-                            'likelihood'  => $data[21]
-
+                            'end_year'    => $data[0],
+                            'citylng'     => $data[1],
+                            'citylat'     => $data[2],
+                            'intensity'   => $data[3],
+                            'sector'      => $data[4],
+                            'topic'       => $data[5],
+                            'insight'     => $data[6],
+                            'swot'        => $data[7],
+                            'url'         => $data[8],
+                            'region'      => $data[9],
+                            'start_year'  => $data[10],
+                            'impact'      => $data[11],
+                            'added'       => $data[12],
+                            'published'   => $data[13],
+                            'city'        => $data[14],
+                            'country'     => $data[15],
+                            'relevance'   => $data[16],
+                            'pestle'      => $data[17],
+                            'source'      => $data[18],
+                            'title'       => $data[19],
+                            'likelihood'  => $data[20]
+                            
                             // Add other user details as needed, e.g., 'name' => $data['name']
                         );
-                        print_r($new_user_data);exit;
 
-                        $this->commonModel->add_data('events',$new_user_data);  // Insert data into database table.
+                        // print_r($new_user_data);exit;
+
+                        $this->CommonModel->add_data('events',$new_user_data);  // Insert data into database table.
                     }
                     fclose($handle);
                 } 
