@@ -10,18 +10,16 @@
 			$this->load->model('DashboardModel', 'dashboardModel');
 		}
 
-		public function loadCommonViews($page)
+		public function loadCommonViews($page,$data)
 		{
 			$this->load->view("template/header");
 			$this->load->view("template/sidebar");
-			$this->load->view($page);
+			$this->load->view($page,compact("data"));
 			$this->load->view("template/footer");
 		}
 
 		public function index()
         {   
-			$prim_data = $this->dashboardModel->getPrimdData();
-
 			//data by column  
 			$year_end = $this->dashboardModel->getYearEndData();    
 			$topic_data = $this->dashboardModel->getTopicData();
@@ -40,10 +38,32 @@
 			$diff_pest = $this->dashboardModel->getDiffPestData();			
 			$diff_source = $this->dashboardModel->getDiffSourecData();
 
-			print_r($prim_data); exit; 
+			// print_r($diff_pest); exit; 
 
-            $this -> loadCommonViews("dashboard", compact('year_end','topic_data','sector_data','region_data','pest_data','swot_data','country_data','city_data','diff_source'));            
+			$data = [
+				'diff_sector' => $diff_sector,
+				'diff_topics' => $diff_topics,
+				'diff_source' => $diff_source,
+			];
+
+			// print_r($data);exit;
+
+            $this ->loadCommonViews("dashboard",$data); 
+
+            // $this ->loadCommonViews("dashboard",['pestle'=>$diff_pest]);            
+
+        }
+
+		public function get_trent_list()
+        {
+            $prim_data = $this->dashboardModel->getPrimdData();
+
+            // print_r($prim_data);exit;
+            
+            header('Content-Type: application/json');
+            echo json_encode($prim_data);
         }
 	}
+	
 
 ?>
