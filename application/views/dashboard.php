@@ -138,6 +138,8 @@
                                         <!-- /.card-body -->
                                     </div>
 
+                    </div>
+
                                 </div>
                                 <!-- /.col -->
                             </div>

@@ -24,16 +24,18 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$this->datatable = new Datatables(new CodeigniterAdapter);
 		}
 
-		public function loadCommonViews($page,$data)
+		public function loadCommonViews($page)
 		{
 			$this->load->view("template/header");
 			$this->load->view("template/sidebar");
-			$this->load->view($page,compact("data"));
+			$this->load->view($page);
 			$this->load->view("template/footer");
 		}
 
 		public function index()
         {   
+			$prim_data = $this->dashboardModel->getPrimdData();
+
 			//data by column  
 			$year_end = $this->dashboardModel->getYearEndData();    
 			$topic_data = $this->dashboardModel->getTopicData();
@@ -52,15 +54,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$diff_pest = $this->dashboardModel->getDiffPestData();			
 			$diff_source = $this->dashboardModel->getDiffSourecData();
 
-			// print_r($diff_pest); exit; 
-
-			$data = [
-				'diff_sector' => $diff_sector,
-				'diff_topics' => $diff_topics,
-				'diff_source' => $diff_source,
-			];
-
-			// print_r($data);exit;
+			print_r($prim_data); exit; 
 
             $this ->loadCommonViews("dashboard",$data); 
 
@@ -77,6 +71,5 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
             $this->output->set_output($this->datatable->generate());
         }
 	}
-	
 
 ?>

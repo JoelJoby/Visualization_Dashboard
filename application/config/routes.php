@@ -51,8 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'DashboardController';
 
-$route['get_data_list'] = 'DashboardController/get_trent_list';
-
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

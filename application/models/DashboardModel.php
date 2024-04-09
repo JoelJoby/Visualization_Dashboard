@@ -8,9 +8,10 @@
         {
             $this->db->select('ID,sector,topic,source,insight');
             $this->db->from("events");
-            $this->db->limit(10);
-           
-		    return $datatable->query($this->db->get_compiled_select());
+
+            $query = $this->db->get();
+		    return $query->result();
+
         }
 
         public function getYearEndData()
@@ -123,7 +124,6 @@
             $this->db->select('region');
             $this->db->distinct();
             $this->db->from( 'events' );
-            $this->db->limit(2);
             $this->db->where('region !=', ''); 
 
             $query = $this->db->get();
@@ -135,7 +135,6 @@
             $this->db->select('pestle');
             $this->db->distinct();
             $this->db->from( 'events' );
-            // $this->db->limit(2);
             $this->db->where('pestle !=', ''); 
 
             $query = $this->db->get();
@@ -147,7 +146,6 @@
             $this->db->select('source');
             $this->db->distinct();
             $this->db->from( 'events' );
-            // $this->db->limit(2);
             $this->db->where('source !=', ''); 
 
             $query = $this->db->get();
