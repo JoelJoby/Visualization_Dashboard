@@ -1,7 +1,3 @@
-<?php 
-    
-?>
-
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -76,7 +72,7 @@
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6><span><?=count($data['diff_source']);?></span></h6>
+                                        <h6><span><?=count($data['diff_source']);?></span></h6>                                        
                                     </div>
                                 </div>
                             </div>
@@ -84,70 +80,22 @@
                         </div>
                     </div>
 
-                    <!-- <div class="card">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Recent Trends</h5>
-
-                            <table id="dataAll" data-role ="ui-datatable" class="table table-borderless" data-src ="<?=base_url()?>get_data_list">
-
+                            <table id="dataAll" class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th data_colname="ID">ID</th>
-                                        <th data_colname="sector">sector</th>
-                                        <th data_colname="topic">topic</th>
-                                        <th data_colname="source">source</th>
-                                        <th data_colname="insight">insight</th>
+                                        <th scope="col" data-colname="ID">#</th>
+                                        <th scope="col" data-colname="sector">sector</th>
+                                        <th scope="col" data-colname="topic">topic</th>
+                                        <th scope="col" data-colname="source">source</th>
+                                        <th scope="col" data-colname="insight">insight</th>
                                     </tr>
                                 </thead>
-
                             </table>
-
                         </div>
-                    </div> -->
-                    <section class="content">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <!-- /.card-header -->
-
-                                        <div class="card-body">
-                                           
-                                            <table id="example1" data-role="ui-datatable"
-                                                data-src="<?=base_url()?>DashboardController/get_trent_list"
-                                                class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="pt-0" data-colname="ID">#</th>
-                                                        <th class="pt-0" data-colname="sector">sector
-                                                        </th>
-                                                        <th class="pt-0" data-colname="topic">topic </th>
-                                                        <th class="pt-0" data-colname="source">source
-                                                        </th>
-                                                        <th class="pt-0" data-colname="insight">insight</th>
-                                                      
-
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-
                     </div>
-
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.container-fluid -->
-                            
-                    </section>
 
                 </div>
             </div>
@@ -158,27 +106,16 @@
 
 </main><!-- End #main -->
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> 
 
-<!-- <script>
-    $('#dataAll').DataTable({
-        serverSide: true,
-        processing: true,
-        searching: true,
-        paging: true,
-        ajax: {
-            url: '<?=base_url()?>get_data_list',
-            type: 'POST',
-            dataSrc: function(response) {
-            console.log(response); // Log the response data
-            return response.data; // Assuming the data array is nested under a 'data' key
-        }
-        },
+<script>
+
+    new DataTable('#dataAll', {
+        ajax: '<?=base_url()?>get_data_list',
         columns: [
             { data: 'ID' },
             { data: 'sector' },
@@ -187,4 +124,26 @@
             { data: 'insight' }
         ]
     });
-</script> -->
+
+    // $('#dataAll').DataTable({
+    //     serverSide: true,
+    //     processing: true,
+    //     searching: true,
+    //     paging: true,
+    //     ajax: {
+    //         url: '<?=base_url()?>get_data_list',
+    //         type: 'POST',
+    //         dataSrc: function(response) {
+    //         console.log(response); 
+    //         return response; 
+    //     }
+    //     },
+    //     columns: [
+    //         { data: 'ID' },
+    //         { data: 'sector' },
+    //         { data: 'topic' },
+    //         { data: 'source' },
+    //         { data: 'insight' }
+    //     ]
+    // });
+</script>

@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit ('No direct script access allowed');
+
+	defined('BASEPATH') OR exit('No direct script access allowed');
 	use Ozdemir\Datatables\Datatables;
 	use Ozdemir\Datatables\DB\CodeigniterAdapter;
 	use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -7,7 +8,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 	class DashboardController extends Admin_Controller
 	{
-        public $datatable;
+		public $datatable;
 
 		function __construct()
 		{
@@ -24,18 +25,16 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$this->datatable = new Datatables(new CodeigniterAdapter);
 		}
 
-		public function loadCommonViews($page)
+		public function loadCommonViews($page,$data)
 		{
 			$this->load->view("template/header");
 			$this->load->view("template/sidebar");
-			$this->load->view($page);
+			$this->load->view($page,compact("data"));
 			$this->load->view("template/footer");
 		}
 
 		public function index()
         {   
-			$prim_data = $this->dashboardModel->getPrimdData();
-
 			//data by column  
 			$year_end = $this->dashboardModel->getYearEndData();    
 			$topic_data = $this->dashboardModel->getTopicData();
@@ -54,22 +53,52 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$diff_pest = $this->dashboardModel->getDiffPestData();			
 			$diff_source = $this->dashboardModel->getDiffSourecData();
 
-			print_r($prim_data); exit; 
+			// print_r($diff_pest); exit; 
+
+			$data = [
+				'diff_sector' => $diff_sector,
+				'diff_topics' => $diff_topics,
+				'diff_source' => $diff_source,
+			];
+
+			// print_r($data);exit;
 
             $this ->loadCommonViews("dashboard",$data); 
 
             // $this ->loadCommonViews("dashboard",['pestle'=>$diff_pest]);            
+        }
 
+		public function get_joel_list()
+        {
+            // $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
+
+			// $this->output->set_output($this->datatable->generate());
+
+            $prim_data = $this->dashboardModel->getPrimdData();
+            
+            header('Content-Type: application/json');
+            echo json_encode($prim_data);
         }
 
 		public function get_trent_list()
         {
-            $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
+            // $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
+			// $this->output->set_output($this->datatable->generate());
 
-             print_r($prim_data);exit;
-            
-            $this->output->set_output($this->datatable->generate());
+            $prim_data = $this->dashboardModel->getPrimdData();
+
+			$data = array(
+				"data" => $prim_data
+			);
+
+			// $data = array("data" => $prim_data);
+
+            header('Content-Type: application/json');
+            $dataencode = json_encode($data);
+
+			echo $dataencode;
         }
 	}
+	
 
 ?>

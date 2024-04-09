@@ -1,18 +1,30 @@
 <?php
 
-    defined('BASEPATH') OR exit('No direct script access allowed');
-
-    class DashboardModel extends CI_Model
+    class DashboardModel extends CommonModel
     {
-        public function getPrimdData($datatable)
+        public function __construct()
+        {
+            parent::__construct();            
+        }
+
+        public function getPrimdData()
         {
             $this->db->select('ID,sector,topic,source,insight');
             $this->db->from("events");
+            // $this->db->limit(10);
 
             $query = $this->db->get();
 		    return $query->result();
-
         }
+
+        // public function getPrimdData($datatable)
+        // {
+        //     $this->db->select('ID,sector,topic,source,insight');
+        //     $this->db->from("events");
+        //     $this->db->limit(10);
+
+        //     return $datatable->query($this->db->get_compiled_select());
+        // }
 
         public function getYearEndData()
         {
@@ -124,6 +136,7 @@
             $this->db->select('region');
             $this->db->distinct();
             $this->db->from( 'events' );
+            $this->db->limit(2);
             $this->db->where('region !=', ''); 
 
             $query = $this->db->get();
@@ -135,6 +148,7 @@
             $this->db->select('pestle');
             $this->db->distinct();
             $this->db->from( 'events' );
+            // $this->db->limit(2);
             $this->db->where('pestle !=', ''); 
 
             $query = $this->db->get();
@@ -146,6 +160,7 @@
             $this->db->select('source');
             $this->db->distinct();
             $this->db->from( 'events' );
+            // $this->db->limit(2);
             $this->db->where('source !=', ''); 
 
             $query = $this->db->get();
