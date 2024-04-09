@@ -1,20 +1,16 @@
 <?php
 
-    class DashboardModel extends CommonModel
-    {
-        public function __construct()
-        {
-            parent::__construct();            
-        }
+    defined('BASEPATH') OR exit('No direct script access allowed');
 
-        public function getPrimdData()
+    class DashboardModel extends CI_Model
+    {
+        public function getPrimdData($datatable)
         {
             $this->db->select('ID,sector,topic,source,insight');
             $this->db->from("events");
             $this->db->limit(10);
-
-            $query = $this->db->get();
-		    return $query->result();
+           
+		    return $datatable->query($this->db->get_compiled_select());
         }
 
         public function getYearEndData()

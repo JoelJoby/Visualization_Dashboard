@@ -1,13 +1,27 @@
 <?php
+defined('BASEPATH') OR exit ('No direct script access allowed');
+	use Ozdemir\Datatables\Datatables;
+	use Ozdemir\Datatables\DB\CodeigniterAdapter;
+	use PhpOffice\PhpSpreadsheet\Spreadsheet;
+	use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-	class DashboardController extends CI_Controller
+	class DashboardController extends Admin_Controller
 	{
+        public $datatable;
+
 		function __construct()
 		{
 			parent::__construct();
 
 			$this->load->model('CommonModel');
 			$this->load->model('DashboardModel', 'dashboardModel');
+			$this->load_data_table();
+		}
+
+		private function load_data_table()
+		{
+			require_once APPPATH.'third_party/ozdemir-datatable/vendor/autoload.php';
+			$this->datatable = new Datatables(new CodeigniterAdapter);
 		}
 
 		public function loadCommonViews($page,$data)
@@ -56,12 +70,11 @@
 
 		public function get_trent_list()
         {
-            $prim_data = $this->dashboardModel->getPrimdData();
+            $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
 
-            // print_r($prim_data);exit;
+             print_r($prim_data);exit;
             
-            header('Content-Type: application/json');
-            echo json_encode($prim_data);
+            $this->output->set_output($this->datatable->generate());
         }
 	}
 	
