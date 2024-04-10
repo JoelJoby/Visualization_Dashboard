@@ -63,24 +63,27 @@
 
 			// print_r($data);exit;
 
-            $this ->loadCommonViews("dashboard",$data); 
-
-            // $this ->loadCommonViews("dashboard",['pestle'=>$diff_pest]);            
+            $this ->loadCommonViews("dashboard",$data);         
         }
 
-		public function get_joel_list()
-        {
-            // $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
+		public function trend_details($id)
+		{
+			$condition = array('id'=>$id);
 
-			// $this->output->set_output($this->datatable->generate());
+			$trend_details = $this->CommonModel->get_datas('events',$condition);
 
-            $prim_data = $this->dashboardModel->getPrimdData();
-            
-            header('Content-Type: application/json');
-            echo json_encode($prim_data);
-        }
+			// header('Content-Type: application/json');
+            // $dataEncode = json_encode($trend_details);
 
-		public function get_trent_list()
+			// echo $dataEncode;
+
+			// print_r($trend_details);
+			// exit;
+
+			$this->loadCommonViews("trend_details",$trend_details);
+		}
+
+		public function get_data_list()
         {
             // $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
 			// $this->output->set_output($this->datatable->generate());
@@ -91,14 +94,15 @@
 				"data" => $prim_data
 			);
 
-			// $data = array("data" => $prim_data);
-
             header('Content-Type: application/json');
-            $dataencode = json_encode($data);
+            $dataEncode = json_encode($data);
 
-			echo $dataencode;
+			echo $dataEncode;
         }
+
 	}
+
+
 	
 
 ?>
