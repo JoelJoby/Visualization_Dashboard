@@ -4,12 +4,11 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url()?>">Home</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
     </div>
-    <!-- End Page Title -->
 
     <section class="section dashboard">
         <div class="row">
@@ -27,7 +26,7 @@
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bi bi-briefcase-fill"></i>
                                     </div>
 
                                     <div class="ps-3">
@@ -48,7 +47,7 @@
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bi bi-list-check"></i>
                                     </div>
 
                                     <div class="ps-3">
@@ -69,10 +68,10 @@
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-dollar"></i>
+                                        <i class="bi bi-link-45deg"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6><span><?=count($data['diff_source']);?></span></h6>                                        
+                                        <h6><span><?=count($data['diff_source']);?></span></h6>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +82,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Recent Trends</h5>
-                            <table id="dataAll" class="table table-borderless">
-                                <thead>
+                            <table id="dataAll" class="table">
+                                <thead style="margin-top: 10em;">
                                     <tr>
                                         <th scope="col" data-colname="ID">#</th>
                                         <th scope="col" data-colname="sector">sector</th>
@@ -97,53 +96,110 @@
                         </div>
                     </div>
 
+                    <div class="card">
+                        <div id="container">
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- End Left side columns -->
 
+            <!--  Right side columns -->
+            <div class="col-lg-4">
+
+            </div>
+
         </div>
     </section>
 
-</main><!-- End #main -->
+</main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
 <script>
+new DataTable('#dataAll', {
+    ajax: '<?=base_url()?>get_data_list',
+    columns: [{
+            data: 'ID'
+        },
+        {
+            data: 'sector'
+        },
+        {
+            data: 'topic'
+        },
+        {
+            data: 'source'
+        },
+        {
+            data: 'insight'
+        }
+    ]
+});
 
-    new DataTable('#dataAll', {
-        ajax: '<?=base_url()?>get_data_list',
-        columns: [
-            { data: 'ID' },
-            { data: 'sector' },
-            { data: 'topic' },
-            { data: 'source' },
-            { data: 'insight' }
-        ]
-    });
+// $('#dataAll').DataTable({
+//     serverSide: true,
+//     processing: true,
+//     searching: true,
+//     paging: true,
+//     ajax: {
+//         url: '<?=base_url()?>get_data_list',
+//         type: 'POST',
+//         dataSrc: function(response) {
+//         console.log(response); 
+//         return response; 
+//     }
+//     },
+//     columns: [
+//         { data: 'ID' },
+//         { data: 'sector' },
+//         { data: 'topic' },
+//         { data: 'source' },
+//         { data: 'insight' }
+//     ]
+// });
+</script>
 
-    // $('#dataAll').DataTable({
-    //     serverSide: true,
-    //     processing: true,
-    //     searching: true,
-    //     paging: true,
-    //     ajax: {
-    //         url: '<?=base_url()?>get_data_list',
-    //         type: 'POST',
-    //         dataSrc: function(response) {
-    //         console.log(response); 
-    //         return response; 
-    //     }
-    //     },
-    //     columns: [
-    //         { data: 'ID' },
-    //         { data: 'sector' },
-    //         { data: 'topic' },
-    //         { data: 'source' },
-    //         { data: 'insight' }
-    //     ]
-    // });
+<script type="module">
+// Declare the chart dimensions and margins.
+const width = 640;
+const height = 400;
+const marginTop = 20;
+const marginRight = 20;
+const marginBottom = 30;
+const marginLeft = 40;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleUtc()
+    .domain([new Date("2023-01-01"), new Date("2024-01-01")])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([0, 100])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// Add the x-axis.
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
+
+// Add the y-axis.
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y));
+
+// Append the SVG element.
+container.append(svg.node());
 </script>
