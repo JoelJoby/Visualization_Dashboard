@@ -17,15 +17,6 @@
 		    return $query->result();
         }
 
-        // public function getPrimdData($datatable)
-        // {
-        //     $this->db->select('ID,sector,topic,source,insight');
-        //     $this->db->from("events");
-        //     $this->db->limit(10);
-
-        //     return $datatable->query($this->db->get_compiled_select());
-        // }
-
         public function getYearEndData()
         {
             $this->db->select("end_year");

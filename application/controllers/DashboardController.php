@@ -53,15 +53,11 @@
 			$diff_pest = $this->dashboardModel->getDiffPestData();			
 			$diff_source = $this->dashboardModel->getDiffSourecData();
 
-			// print_r($diff_pest); exit; 
-
 			$data = [
 				'diff_sector' => $diff_sector,
 				'diff_topics' => $diff_topics,
 				'diff_source' => $diff_source,
 			];
-
-			// print_r($data);exit;
 
             $this ->loadCommonViews("dashboard",$data);         
         }
@@ -72,22 +68,11 @@
 
 			$trend_details = $this->CommonModel->get_datas('events',$condition);
 
-			// header('Content-Type: application/json');
-            // $dataEncode = json_encode($trend_details);
-
-			// echo $dataEncode;
-
-			// print_r($trend_details);
-			// exit;
-
 			$this->loadCommonViews("trend_details",$trend_details);
 		}
 
 		public function get_data_list()
         {
-            // $prim_data = $this->dashboardModel->getPrimdData($this->datatable);
-			// $this->output->set_output($this->datatable->generate());
-
             $prim_data = $this->dashboardModel->getPrimdData();
 
 			$data = array(

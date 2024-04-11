@@ -15,15 +15,9 @@
 
             // $csvFile = include(APPPATH . 'uploads/Data.csv');
 
-            // echo "CSV File: $csvFile";
-            // print_r("Hello");
-            // exit;
-
             if (file_exists($csvFile)) 
             {
                 $handle = fopen($csvFile, 'r'); // Open the CSV file for reading.
-
-                //  print_r($handle);exit;       
 
                 if ($handle !== false)  // Check if the file was opened successfully.
                 {
@@ -54,8 +48,6 @@
                             
                             // Add other user details as needed, e.g., 'name' => $data['name']
                         );
-
-                        // print_r($new_user_data);exit;
 
                         $this->CommonModel->add_data('events',$new_user_data);  // Insert data into database table.
                     }

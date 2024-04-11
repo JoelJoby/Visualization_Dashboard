@@ -9,7 +9,6 @@ class CommonModel extends CI_Model
 
     private function where_conditions($conditions)
 	{
-		// $this->db->where('is_deleted',0);
 		if($conditions)
 			$this->db->where($conditions);
 	}

@@ -21,7 +21,7 @@
                         <div class="card info-card sales-card">
 
                             <div class="card-body">
-                                <h5 class="card-title"> Num of Sectors</h5>
+                                <h5 class="card-title">Number of Sectors</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
@@ -42,7 +42,7 @@
                         <div class="card info-card sales-card">
 
                             <div class="card-body">
-                                <h5 class="card-title"> Num of Topics</h5>
+                                <h5 class="card-title">Number of Topics</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
@@ -63,7 +63,7 @@
                         <div class="card info-card revenue-card">
 
                             <div class="card-body">
-                                <h5 class="card-title">Num of Source's</h5>
+                                <h5 class="card-title">Number of Sources</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
@@ -79,32 +79,32 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Recent Trends</h5>
-                            <table id="dataAll" class="table">
-                                <thead style="margin-top: 10em;">
-                                    <tr>
-                                        <th scope="col" data-colname="ID">#</th>
-                                        <th scope="col" data-colname="sector">sector</th>
-                                        <th scope="col" data-colname="topic">topic</th>
-                                        <th scope="col" data-colname="source">source</th>
-                                        <th scope="col" data-colname="insight">insight</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div id="container">
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <!-- End Left side columns -->
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Trends</h5>
+                    <table id="dataAll" class="table">
+                        <thead style="margin-top: 10em;">
+                            <tr>
+                                <th scope="col" data-colname="ID">#</th>
+                                <th scope="col" data-colname="sector">sector</th>
+                                <th scope="col" data-colname="topic">topic</th>
+                                <th scope="col" data-colname="source">source</th>
+                                <th scope="col" data-colname="insight">insight</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div id="container">
+
+                </div>
+            </div>
 
             <!--  Right side columns -->
             <div class="col-lg-4">
@@ -123,83 +123,75 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
 <script>
-new DataTable('#dataAll', {
-    ajax: '<?=base_url()?>get_data_list',
-    columns: [{
-            data: 'ID'
-        },
-        {
-            data: 'sector'
-        },
-        {
-            data: 'topic'
-        },
-        {
-            data: 'source'
-        },
-        {
-            data: 'insight'
-        }
-    ]
-});
 
-// $('#dataAll').DataTable({
-//     serverSide: true,
-//     processing: true,
-//     searching: true,
-//     paging: true,
-//     ajax: {
-//         url: '<?=base_url()?>get_data_list',
-//         type: 'POST',
-//         dataSrc: function(response) {
-//         console.log(response); 
-//         return response; 
-//     }
-//     },
-//     columns: [
-//         { data: 'ID' },
-//         { data: 'sector' },
-//         { data: 'topic' },
-//         { data: 'source' },
-//         { data: 'insight' }
-//     ]
-// });
+    new DataTable('#dataAll', {
+        ajax: '<?=base_url()?>get_data_list',
+        columns: [{
+                data: 'ID'
+            },
+            {
+                data: 'sector'
+            },
+            {
+                data: 'topic'
+            },
+            {
+                data: 'source'
+            },
+            {
+                data: 'insight',
+                render: function(data, type, row, meta) {
+                    // 'type' is used to check if it's 'display' to render on the UI
+                    if (type === 'display') {
+                        // Assuming 'id' is a unique identifier for each record
+                        var link = '<a href="' + '<?=base_url()?>get_data_list/data_details/' + row.ID +
+                            '" title="Click on to view Details">' + data + '</a>';
+                        return link;
+                    }
+                    return data; // For other types (filter, sort, etc.), just return the data
+                }
+            }
+        ]
+    });
+
 </script>
 
 <script type="module">
-// Declare the chart dimensions and margins.
-const width = 640;
-const height = 400;
-const marginTop = 20;
-const marginRight = 20;
-const marginBottom = 30;
-const marginLeft = 40;
 
-// Declare the x (horizontal position) scale.
-const x = d3.scaleUtc()
-    .domain([new Date("2023-01-01"), new Date("2024-01-01")])
-    .range([marginLeft, width - marginRight]);
+    // Declare the chart dimensions and margins.
+    const width = 640;
+    const height = 400;
+    const marginTop = 20;
+    const marginRight = 20;
+    const marginBottom = 30;
+    const marginLeft = 40;
 
-// Declare the y (vertical position) scale.
-const y = d3.scaleLinear()
-    .domain([0, 100])
-    .range([height - marginBottom, marginTop]);
+    // Declare the x (horizontal position) scale.
+    const x = d3.scaleUtc()
+        .domain([new Date("2023-01-01"), new Date("2024-01-01")])
+        .range([marginLeft, width - marginRight]);
 
-// Create the SVG container.
-const svg = d3.create("svg")
-    .attr("width", width)
-    .attr("height", height);
+    // Declare the y (vertical position) scale.
+    const y = d3.scaleLinear()
+        .domain([0, 100])
+        .range([height - marginBottom, marginTop]);
 
-// Add the x-axis.
-svg.append("g")
-    .attr("transform", `translate(0,${height - marginBottom})`)
-    .call(d3.axisBottom(x));
+    // Create the SVG container.
+    const svg = d3.create("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// Add the y-axis.
-svg.append("g")
-    .attr("transform", `translate(${marginLeft},0)`)
-    .call(d3.axisLeft(y));
+    // Add the x-axis.
+    svg.append("g")
+        .attr("transform", `translate(0,${height - marginBottom})`)
+        .call(d3.axisBottom(x));
 
-// Append the SVG element.
-container.append(svg.node());
+    // Add the y-axis.
+    svg.append("g")
+        .attr("transform", `translate(${marginLeft},0)`)
+        .call(d3.axisLeft(y));
+
+    // Append the SVG element.
+    container.append(svg.node());
+    
 </script>
