@@ -14,10 +14,10 @@
         <div class="row">
 
             <!-- Left side columns -->
-            <div class="col-lg-8">
+        
                 <div class="row">
 
-                    <div class="col-xxl-4 col-md-6">
+                    <div class="col-lg-3 col-6">
                         <div class="card info-card sales-card">
 
                             <div class="card-body">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xxl-4 col-md-6">
+                    <div class="col-lg-3 col-6">
                         <div class="card info-card sales-card">
 
                             <div class="card-body">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xxl-4 col-md-6">
+                    <div class="col-lg-3 col-6">
                         <div class="card info-card revenue-card">
 
                             <div class="card-body">
@@ -114,6 +114,10 @@
         </div>
     </section>
 
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -123,75 +127,56 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
 <script>
-
-    new DataTable('#dataAll', {
-        ajax: '<?=base_url()?>get_data_list',
-        columns: [{
-                data: 'ID'
-            },
-            {
-                data: 'sector'
-            },
-            {
-                data: 'topic'
-            },
-            {
-                data: 'source'
-            },
-            {
-                data: 'insight',
-                render: function(data, type, row, meta) {
-                    // 'type' is used to check if it's 'display' to render on the UI
-                    if (type === 'display') {
-                        // Assuming 'id' is a unique identifier for each record
-                        var link = '<a href="' + '<?=base_url()?>get_data_list/data_details/' + row.ID +
-                            '" title="Click on to view Details">' + data + '</a>';
-                        return link;
-                    }
-                    return data; // For other types (filter, sort, etc.), just return the data
+new DataTable('#dataAll', {
+    ajax: '<?=base_url()?>get_data_list',
+    columns: [{
+            data: 'ID'
+        },
+        {
+            data: 'sector'
+        },
+        {
+            data: 'topic'
+        },
+        {
+            data: 'source'
+        },
+        {
+            data: 'insight',
+            render: function(data, type, row, meta) {
+                // 'type' is used to check if it's 'display' to render on the UI
+                if (type === 'display') {
+                    // Assuming 'id' is a unique identifier for each record
+                    var link = '<a href="' + '<?=base_url()?>get_data_list/data_details/' + row.ID +
+                        '" title="Click on to view Details">' + data + '</a>';
+                    return link;
                 }
+                return data; // For other types (filter, sort, etc.), just return the data
             }
-        ]
-    });
-
+        }
+    ]
+});
 </script>
 
-<script type="module">
+<script>
+const ctx = document.getElementById('myChart');
 
-    // Declare the chart dimensions and margins.
-    const width = 640;
-    const height = 400;
-    const marginTop = 20;
-    const marginRight = 20;
-    const marginBottom = 30;
-    const marginLeft = 40;
-
-    // Declare the x (horizontal position) scale.
-    const x = d3.scaleUtc()
-        .domain([new Date("2023-01-01"), new Date("2024-01-01")])
-        .range([marginLeft, width - marginRight]);
-
-    // Declare the y (vertical position) scale.
-    const y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height - marginBottom, marginTop]);
-
-    // Create the SVG container.
-    const svg = d3.create("svg")
-        .attr("width", width)
-        .attr("height", height);
-
-    // Add the x-axis.
-    svg.append("g")
-        .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(d3.axisBottom(x));
-
-    // Add the y-axis.
-    svg.append("g")
-        .attr("transform", `translate(${marginLeft},0)`)
-        .call(d3.axisLeft(y));
-
-    // Append the SVG element.
-    container.append(svg.node());
-    
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
