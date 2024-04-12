@@ -51,21 +51,121 @@
 
             <div class="col-lg-4 col-6">
                 <div class="card info-card sales-card">
-
                     <div class="card-body">
-                        <h5 class="card-title">SWOT</h5>
+                        <h5 class="card-title">SWOT : <?=$data->swot?></h5>
 
                         <div class="d-flex align-items-center">
                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                 <i class="bi bi-bar-chart"></i>
                             </div>
-
-                            <div class="ps-3">
-                                <h6><span><?=$data->swot?></span></h6>
-                            </div>
                         </div>
-                    </div>
 
+                        <div class="mt-3 row">
+
+                            <div class="col-6">
+                                <div class="square-box strengths"></div>
+                                <?php
+                                    if($data->swot == 'Strength') 
+                                    { ?>
+                                        <style>
+                                            .strengths{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: green;
+                                                margin-bottom: 10px;
+                                            }
+                                            .weaknesses, .opportunities, .threats{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: #ccc; 
+                                                margin-bottom: 10px; 
+                                            }
+                                        </style>
+                                <?php } ?>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="square-box weaknesses"></div>
+                                <?php
+                                    if($data->swot == 'Weakness') 
+                                    { ?>
+                                        <style>
+                                            .weaknesses{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: green;
+                                                margin-bottom: 10px;
+                                            }
+                                            .strengths, .opportunities, .threats{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: #ccc; 
+                                                margin-bottom: 10px; 
+                                            }
+                                        </style>
+                                <?php } ?>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="square-box opportunities"></div>
+                                <?php
+                                    if($data->swot == 'Opportunity') 
+                                    { ?>
+                                        <style>
+                                            .opportunities{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: green;
+                                                margin-bottom: 10px;
+                                            }
+                                            .strengths, .weaknesses, .threats{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: #ccc; 
+                                                margin-bottom: 10px; 
+                                            }
+                                        </style>
+                                <?php } ?>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="square-box threats"></div>
+                                <?php
+                                    if($data->swot == 'Threat') 
+                                    { ?>
+                                        <style>
+                                            .threats{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: green;
+                                                margin-bottom: 10px;
+                                            }
+                                            .strengths, .weaknesses, .opportunities{
+                                                width: 100%; 
+                                                padding-top: 100%; 
+                                                background-color: #ccc; 
+                                                margin-bottom: 10px; 
+                                            }
+                                        </style>
+                                <?php } ?>
+                            </div>
+
+                            <?php
+                                if($data->swot == '')
+                                    { ?>
+                                    <style>
+                                        .dashboard .square-box {
+                                            width: 100%; 
+                                            padding-top: 100%; 
+                                            background-color: #ccc; 
+                                            margin-bottom: 10px; 
+                                        }
+                                    </style>
+                            <?php    } ?>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
