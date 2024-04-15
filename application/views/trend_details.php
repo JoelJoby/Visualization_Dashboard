@@ -219,24 +219,28 @@
 
                 <div class="col-12">
                     <label for="inputAddress5" class="form-label">Source</label>
-                    <input readonly type="text" class="form-control" value="<?= $data->source ? $data->source : 'Source Not Specified'; ?>">
+                    <input readonly type="text" class="form-control"
+                        value="<?= $data->source ? $data->source : 'Source Not Specified'; ?>">
                 </div>
 
                 <div class="row" style="margin-top: 1em;">
 
                     <div class="col-md-4">
                         <label for="inputZip" class="form-label">Pestle</label>
-                        <input readonly type="text" class="form-control" value="<?= $data->pestle ? $data->pestle : 'Pestle Not Specified'; ?>">
+                        <input readonly type="text" class="form-control"
+                            value="<?= $data->pestle ? $data->pestle : 'Pestle Not Specified'; ?>">
                     </div>
 
                     <div class="col-md-4">
                         <label for="inputZip" class="form-label">Sector</label>
-                        <input readonly type="text" class="form-control" value="<?= $data->sector ? $data->sector : 'Sector Not Specified';?>">
+                        <input readonly type="text" class="form-control"
+                            value="<?= $data->sector ? $data->sector : 'Sector Not Specified';?>">
                     </div>
 
                     <div class="col-md-4">
                         <label for="inputZip" class="form-label">Topic</label>
-                        <input readonly type="text" class="form-control" value="<?= $data->topic ? $data->topic : 'Topic Not Specified';?>">
+                        <input readonly type="text" class="form-control"
+                            value="<?= $data->topic ? $data->topic : 'Topic Not Specified';?>">
                     </div>
 
                 </div>
@@ -245,17 +249,20 @@
 
                     <div class="col-md-4">
                         <label for="inputZip" class="form-label">Region</label>
-                        <input readonly type="text" class="form-control" value="<?=$data->region ? $data->region : 'Region Not Specified';?>">
+                        <input readonly type="text" class="form-control"
+                            value="<?=$data->region ? $data->region : 'Region Not Specified';?>">
                     </div>
 
                     <div class="col-md-4">
                         <label for="inputZip" class="form-label">Country</label>
-                        <input readonly type="text" class="form-control" value="<?=$data->country ? $data->country : 'Country Not Specified';?>">
+                        <input readonly type="text" class="form-control"
+                            value="<?=$data->country ? $data->country : 'Country Not Specified';?>">
                     </div>
 
                     <div class="col-md-4">
                         <label for="inputZip" class="form-label">City</label>
-                        <input readonly type="text" class="form-control" value="<?=$data->city ? $data->city : 'City Not Specified';?>">
+                        <input readonly type="text" class="form-control"
+                            value="<?=$data->city ? $data->city : 'City Not Specified';?>">
                     </div>
 
                 </div>
@@ -272,12 +279,14 @@
 
                 <div class="col-md-6">
                     <label for="inputEmail5" class="form-label">Start Year</label>
-                    <input readonly type="text" class="form-control" value="<?= $data->start_year ? $data->start_year : 'Start Year Not Specified'; ?>">
+                    <input readonly type="text" class="form-control"
+                        value="<?= $data->start_year ? $data->start_year : 'Start Year Not Specified'; ?>">
                 </div>
 
                 <div class="col-md-6">
                     <label for="inputPassword5" class="form-label">End Year</label>
-                    <input readonly type="text" class="form-control" value="<?= $data->end_year ? $data->end_year : 'End Year Not Specified'; ?>">
+                    <input readonly type="text" class="form-control"
+                        value="<?= $data->end_year ? $data->end_year : 'End Year Not Specified'; ?>">
                 </div>
 
             </form>

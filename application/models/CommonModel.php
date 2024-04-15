@@ -13,21 +13,6 @@ class CommonModel extends CI_Model
 			$this->db->where($conditions);
 	}
 
-    public function add_data($table,$data)
-	{
-        $this->db->insert($table,$data);
-
-        if($this->db->affected_rows() > 0 )
-        {
-            return $this->db->insert_id();
-        }
-        
-        else
-        {
-            return FALSE;
-        }
-    }
-
     public function get_datas($table,$conditions,$search =[],$limit = null ,$page = null)
 	{
 		$this->where_conditions($conditions);

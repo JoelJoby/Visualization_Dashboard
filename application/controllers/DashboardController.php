@@ -1,5 +1,4 @@
 <?php
-
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	use Ozdemir\Datatables\Datatables;
 	use Ozdemir\Datatables\DB\CodeigniterAdapter;
@@ -35,22 +34,8 @@
 
 		public function index()
         {   
-			//data by column  
-			$year_end = $this->dashboardModel->getYearEndData();    
-			$topic_data = $this->dashboardModel->getTopicData();
-			$sector_data = $this->dashboardModel->getSectorData();
-			$region_data = $this->dashboardModel->getRegionData();
-			$pest_data = $this->dashboardModel->getPestdata();
-			$swot_data = $this->dashboardModel->getswotdata();
-			$country_data = $this->dashboardModel->getcountrydata();
-			$city_data = $this->dashboardModel->getcitydata();
-
-			//data for Filter
-			$diff_endyear = $this->dashboardModel->getDiffEndyearData();
 			$diff_topics = $this->dashboardModel->getDiffTopicsData();
 			$diff_sector = $this->dashboardModel->getDiffSectorData();
-			$diff_region = $this->dashboardModel->getDiffRegionData();
-			$diff_pest = $this->dashboardModel->getDiffPestData();			
 			$diff_source = $this->dashboardModel->getDiffSourecData();
 
 			$data = [
@@ -84,10 +69,5 @@
 
 			echo $dataEncode;
         }
-
 	}
-
-
-	
-
 ?>
